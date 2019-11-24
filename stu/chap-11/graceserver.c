@@ -1,6 +1,3 @@
-//
-// Created by shengym on 2019-07-07.
-//
 
 #include "../lib/common.h"
 
@@ -21,6 +18,8 @@ int main(int argc, char **argv) {
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     server_addr.sin_port = htons(SERV_PORT);
+    int on = 1;
+    setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
 
     int rt1 = bind(listenfd, (struct sockaddr *) &server_addr, sizeof(server_addr));
     if (rt1 < 0) {
@@ -33,7 +32,7 @@ int main(int argc, char **argv) {
     }
 
     signal(SIGINT, sig_int);
-    signal(SIGPIPE, SIG_DFL);
+//    signal(SIGPIPE, SIG_DFL);
 
     int connfd;
     struct sockaddr_in client_addr;
@@ -58,12 +57,12 @@ int main(int argc, char **argv) {
         count++;
 
         char send_line[MAXLINE];
-        sprintf(send_line, "Hi, %s", message);
+        sprintf(send_line, "Hi,%s", message);
 
         sleep(5);
 
         int write_nc = send(connfd, send_line, strlen(send_line), 0);
-        printf("send bytes: %zu \n", write_nc);
+        printf("send bytes: %zu,send_content:%s\n", write_nc,send_line);
         if (write_nc < 0) {
             error(1, errno, "error write");
         }
