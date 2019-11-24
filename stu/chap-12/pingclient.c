@@ -51,6 +51,7 @@ int main(int argc, char **argv) {
         if (rc < 0) {
             error(1, errno, "select failed");
         }
+        //超时时间到并且集合中没有一个描述符有响应时
         if (rc == 0) {
             if (++heartbeats > KEEP_ALIVE_PROBETIMES) {
                 error(1, 0, "connection dead\n");
