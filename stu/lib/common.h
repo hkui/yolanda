@@ -1,14 +1,11 @@
-//
-// Created by shengym on 2019-07-07.
-//
 
 #ifndef YOLANDA_COMMON_H
 #define YOLANDA_COMMON_H
 
 
 #include "log.h"
-//#include "tcp_server.h"
-//#include "inetaddress.h"
+#include "tcp_server.h"
+#include "inetaddress.h"
 //#include "channel_map.h"
 
 #include    <sys/types.h>    /* basic system data types */
