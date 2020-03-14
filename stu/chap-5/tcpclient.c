@@ -47,4 +47,5 @@ int main(int argc, char **argv) {
     send_data(sockfd);
     exit(0);
 }
+//gcc tcpclient.c -o tcpclient -std=c99
 

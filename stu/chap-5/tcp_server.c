@@ -1,5 +1,7 @@
 #include "../lib/common.h"
 
+#define  PORT 8080
+
 void read_data(int sockfd) {
     ssize_t n;
     char buf[1024];
@@ -27,7 +29,7 @@ int main(int argc, char **argv) {
     bzero(&servaddr, sizeof(servaddr));
     servaddr.sin_family = AF_INET;
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    servaddr.sin_port = htons(12345);
+    servaddr.sin_port = htons(PORT);
 
     /* bind到本地地址，端口为12345 */
     bind(listenfd, (struct sockaddr *) &servaddr, sizeof(servaddr));
@@ -42,4 +44,5 @@ int main(int argc, char **argv) {
         close(connfd);          /* 关闭连接套接字，注意不是监听套接字*/
     }
 }
+//gcc tcp_server.c ../lib/read.c  -o tcpserver
 
