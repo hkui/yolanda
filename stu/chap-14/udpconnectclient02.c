@@ -1,20 +1,13 @@
-//
-// Created by shengym on 2019-07-12.
-//
-
-#include "lib/common.h"
-
+#include "../lib/common.h"
 
 # define    NDG         2000    /* datagrams to send */
 # define    DGLEN       1400    /* length of each datagram */
 # define    MAXLINE     4096
 
-
 int main(int argc, char **argv) {
     if (argc != 2) {
         error(1, 0, "usage: udpclient2 <IPaddress>");
     }
-
     int socket_fd;
     socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
 
@@ -48,8 +41,7 @@ int main(int argc, char **argv) {
 
         recv_line[0] = 0;
         n = recv(socket_fd, recv_line, MAXLINE, 0);
-        if (n < 0)
-            error(1, errno, "recv failed");
+        if (n < 0) error(1, errno, "recv failed");
         recv_line[n] = 0;
         fputs(recv_line, stdout);
         fputs("\n", stdout);
