@@ -1,6 +1,5 @@
 //
 // Created by shengym on 2019-07-07.
-/
 #include "../lib/common.h"
 
 static int count;
@@ -30,6 +29,7 @@ int main(int argc, char **argv) {
     if (rt2 < 0) {
         error(1, errno, "listen failed ");
     }
+    printf("Server listen on %d\n", SERV_PORT);
 
     signal(SIGPIPE, SIG_IGN);
 
@@ -44,6 +44,7 @@ int main(int argc, char **argv) {
     char message[MAXLINE];
     count = 0;
 
+
     for (;;) {
         int n = read(connfd, message, MAXLINE);
         if (n < 0) {
@@ -57,5 +58,6 @@ int main(int argc, char **argv) {
     }
 
 }
+//gcc addressused.c -o addressused -w
 
 

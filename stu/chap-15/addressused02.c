@@ -1,7 +1,7 @@
 //
 // Created by shengym on 2019-07-07.
 //
-#include "lib/common.h"
+#include "../lib/common.h"
 
 static int count;
 
@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
     int connfd;
     struct sockaddr_in client_addr;
     socklen_t client_len = sizeof(client_addr);
-
+    printf("Server listen on %d\n", SERV_PORT);
     if ((connfd = accept(listenfd, (struct sockaddr *) &client_addr, &client_len)) < 0) {
         error(1, errno, "bind failed ");
     }
