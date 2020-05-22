@@ -33,11 +33,10 @@ int main(int argc, char **argv) {
         n = strlen(message.data);
         message.message_length = htonl(n);
         message.message_type = 1;
-        if (send(socket_fd, (char *) &message, sizeof(message.message_length) + sizeof(message.message_type) + n, 0) <
-            0)
+        if (send(socket_fd, (char *) &message, sizeof(message.message_length) + sizeof(message.message_type) + n, 0) <0)
             error(1, errno, "send failure");
 
     }
     exit(0);
 }
-
+//gcc streamclient.c -o streamclient  -w

@@ -1,18 +1,11 @@
-//
-// Created by shengym on 2019-07-07.
-//
+#include <assert.h>
+#include "common.h"
+#include "tcp_server.h"
+#include "thread_pool.h"
+#include "utils.h"
+#include "tcp_connection.h"
 
-#include "../lib/common.h"
-
-static int count;
-
-static void sig_int(int signo) {
-    printf("\nreceived %d datagrams\n", count);
-    exit(0);
-}
-
-
-int main(int argc, char **argv) {
+int tcp_server(int port) {
     int listenfd;
     listenfd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -20,7 +13,7 @@ int main(int argc, char **argv) {
     bzero(&server_addr, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    server_addr.sin_port = htons(SERV_PORT);
+    server_addr.sin_port = htons(port);
 
     int on = 1;
     setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
@@ -45,22 +38,6 @@ int main(int argc, char **argv) {
         error(1, errno, "bind failed ");
     }
 
-    char buf[128];
-    count = 0;
-
-    while (1) {
-        int n = read_message(connfd, buf, sizeof(buf));
-        if (n < 0) {
-            error(1, errno, "error read message");
-        } else if (n == 0) {
-            error(1, 0, "client closed \n");
-        }
-        buf[n] = 0;
-        printf("received %d bytes: %s\n", n, buf);
-        count++;
-    }
-
+    return connfd;
 }
-//gcc streamserver.c ../lib/read.c  -o streamserver -w
-
 

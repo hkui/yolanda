@@ -18,3 +18,4 @@ int tcp_client(char *address, int port) {
 
     return socket_fd;
 }
+//gcc reliable_client01.c ../lib/tcp_client.c -o reliable_01 -w
