@@ -28,5 +28,4 @@ int main(int argc, char **argv) {
     }
     exit(0);
 }
-//gcc reliable_client01.c ../lib/tcp_client.c -o reliable_client01 -w
 

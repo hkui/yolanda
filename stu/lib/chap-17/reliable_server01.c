@@ -18,7 +18,6 @@ int main(int argc, char **argv) {
         } else if (n == 0) {
             error(1, 0, "client closed \n");
         }
-        printf("buf=%s\n",buf);
 
         sleep(5);
 

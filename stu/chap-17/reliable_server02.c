@@ -2,7 +2,7 @@
 // Created by shengym on 2019-07-07.
 //
 
-#include "lib/common.h"
+#include "../lib/common.h"
 
 
 int main(int argc, char **argv) {
@@ -28,5 +28,6 @@ int main(int argc, char **argv) {
     exit(0);
 
 }
+//gcc reliable_server02.c ../lib/tcp_server_17.c  -o reliable_server02 -w
 
 
