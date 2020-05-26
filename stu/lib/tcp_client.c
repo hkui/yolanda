@@ -1,4 +1,4 @@
-# include "common.h"
+#include "common.h"
 
 int tcp_client(char *address, int port) {
     int socket_fd;
@@ -13,9 +13,8 @@ int tcp_client(char *address, int port) {
     socklen_t server_len = sizeof(server_addr);
     int connect_rt = connect(socket_fd, (struct sockaddr *) &server_addr, server_len);
     if (connect_rt < 0) {
-        error(1, errno, "connect failed ");
+        error(1, errno, "connect failed ",connect_rt);
     }
 
     return socket_fd;
 }
-//gcc reliable_client01.c ../lib/tcp_client.c -o reliable_01 -w
