@@ -4,9 +4,7 @@
 
 
 int main(int argc, char **argv) {
-    if (argc < 2) {
-        error(1, 0, "usage: select01 <IPaddress>");
-    }
+
     int socket_fd = tcp_server(SERV_PORT);
 
     char recv_line[MAXLINE], send_line[MAXLINE];
