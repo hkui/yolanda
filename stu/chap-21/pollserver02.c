@@ -1,4 +1,4 @@
-#include "lib/common.h"
+#include "../lib/common.h"
 
 #define INIT_SIZE 24
 
@@ -20,11 +20,12 @@ void init_event_set() {
 
 }
 
-void add_event_set(int fd, int event) {
+void add_event_set(int fd,  struct pollfd *client) {
     //找到一个可以记录该连接套接字的位置
+    int i;
     for (i = 1; i < FOPEN_MAX; i++) {
         if (client[i].fd < 0) {
-            client[i].fd = connected_fd;
+            client[i].fd =fd;
             client[i].events = POLLRDNORM;
             break;
         }
@@ -62,7 +63,7 @@ int main(int argc, char **argv) {
             socklen_t client_len = sizeof(client_addr);
             connected_fd = accept(listen_fd, (struct sockaddr *) &client_addr, &client_len);
 
-            add_event_set(connected_fd,POLLRDNORM);
+            add_event_set(connected_fd,client);
 
             if (i == FOPEN_MAX) {
                 error(1, errno, "can not hold so many clients");
@@ -101,3 +102,5 @@ int main(int argc, char **argv) {
         }
     }
 }
+
+//gcc pollserver02.c ../lib/tcp_server21.c -o pollserver02 -w
