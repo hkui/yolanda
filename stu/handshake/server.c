@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
-
+#include <arpa/inet.h>
 
 int main(){
     int listenfd=socket(PF_INET,SOCK_STREAM,0);
@@ -30,28 +30,22 @@ int main(){
         perror ("bind");
         exit (EXIT_FAILURE);
     }
-
     int clilen,connfd;
     listen (listenfd, 1024);
 
-    struct sockaddr cliaddr;
 
     socklen_t addrlen;
     int n;
     char buf[1024];
+    struct sockaddr_in cliaddr = {0};
 
     for (;;) {
         clilen = sizeof(cliaddr);
+
         while(connfd = accept(listenfd, (struct sockaddr *) &cliaddr, &clilen)){
-            struct sockaddr_in *clientinfo;
 
-            clientinfo=(struct sockaddr_in *)&cliaddr;
-
-            printf("%d\n",clientinfo->sin_port);
-//            char ip[1024];
-//            ip=inet_ntoa(clientinfo->sin_addr);
-            printf("%s\n",inet_ntoa(clientinfo->sin_addr));
-            printf("%d\n",inet_ntoa((clientinfo->sin_addr).s_addr));
+            printf("port=%d\n",ntohs(cliaddr.sin_port));
+            printf("ip=%s\n",inet_ntoa(cliaddr.sin_addr));
 
             n = read(connfd,&buf,1024);
             printf("n=%d\n",n);
