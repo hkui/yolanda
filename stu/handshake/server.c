@@ -47,8 +47,11 @@ int main(){
             printf("port=%d\n",ntohs(cliaddr.sin_port));
             printf("ip=%s\n",inet_ntoa(cliaddr.sin_addr));
 
-            n = read(connfd,&buf,1024);
-            printf("n=%d\n",n);
+            while(n = read(connfd,&buf,1024)){
+                printf("n=%d,buf=%s",n,buf);
+                bzero(buf, sizeof(buf));
+            }
+
         }
 
         //close(connfd);          /* 关闭连接套接字，注意不是监听套接字*/
