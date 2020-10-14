@@ -51,10 +51,11 @@ int main(){
                 printf("n=%d,buf=%s",n,buf);
                 bzero(buf, sizeof(buf));
             }
+            close(connfd);
 
         }
 
-        //close(connfd);          /* 关闭连接套接字，注意不是监听套接字*/
+
     }
 
     return 0;
