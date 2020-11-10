@@ -14,7 +14,7 @@ void child_run(int fd,int i) {
         if (result == 0) {
 //            exit( i);
             printf("child pid===%d\n",getpid());
-            exit(getpid());
+            exit(260);
             break;
         } else if (result == -1) {
             perror("read");

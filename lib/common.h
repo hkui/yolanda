@@ -79,4 +79,19 @@ int tcp_client(char *address, int port);
 #define    LISTENQ        1024
 #define    BUFFER_SIZE    4096
 
+#ifndef __x86_64_POLL_H
+#define __x86_64_POLL_H
+
+
+/* The rest seem to be more-or-less nonstandard. Check them! */
+#define POLLRDNORM 0x0040
+#define POLLRDBAND 0x0080
+#define POLLWRNORM 0x0100
+#define POLLWRBAND 0x0200
+#define POLLMSG 0x0400
+#define POLLREMOVE 0x1000
+#define POLLRDHUP 0x2000
+
+#endif
+
 #endif //YOLANDA_COMMON_H
